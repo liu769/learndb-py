@@ -1,0 +1,11 @@
+Metadata-Version: 2.4
+Name: LearnDB
+Version: 0.1
+Summary: LearnDB database
+Home-page: https://github.com/spandanb/learndb-py
+Author: Spandan Bemby
+License-File: LICENSE
+Dynamic: author
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: summary
