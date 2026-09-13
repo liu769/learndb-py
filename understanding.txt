@@ -1,0 +1,17 @@
+1.用户与系统交互
+    1.1 用户通过一个接口输入命令（包括 元命令如open、quit 和SQL程序）
+    1.2 接口将命令输出到user input handler（用户输入处理器）
+    1.3 handler对命令分流，SQL程序进入SQL解析器（SQL Parser），不操作数据库的元命令直接被handler处理。
+    1.4 sql程序进入解析器里面的tokenizer（分词器）进行词法解析，识别分解为一个个词元token。
+    1.5 token进入Parser里面进行语法分析，生成抽象语法树AST，最后回传handler，
+    1.6 handler将需要操作数据库的元命令和AST交给VM处理。VM utilities是VM内部的辅助模块，非核心组件。
+    1.7 VM执行指令时需要读写数据，此时要向storage发起请求，存储层为一个栈，从上至下依次为：
+
+            > State Manager：管理数据库元数据（表结构、B-树位置等）。
+            > B-Tree：实际存储数据的 B-树结构。
+            > Pager：管理文件 I/O，将文件抽象为固定大小的页。
+            > OS Filesystem：最终落地到操作系统的文件系统。
+    
+    1.8 storage将数据传给VM，最后VM将处理结果传给handler，handler通过接口输出控制台。
+
+2.
